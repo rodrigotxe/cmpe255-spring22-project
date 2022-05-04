@@ -1,0 +1,104 @@
+{% extends "base.html" %} 
+{% block title %}Hybrid Flower Generator{% endblock %}
+{% block content%}
+<h1 style = "margin-top:30px ; margin-bottom: 40px;" align = "center">Hybrid Flower Generator</h1>
+
+<form method = post action="/">
+  
+  <div class="sliders">
+
+    <table align="center">
+
+      <tr>
+
+{% for key in flowers %}
+  
+        <td align = "center" style = "font-size: 12px; width: 120px;">
+
+          <img alt = "{{key}}" src = "{{ url_for('static', filename = 'image/' + key + '.png' ) }}" width = "75px">
+
+          <br/>
+
+          <label for = "{{key}}">{{flowers[key][0]}}</label>
+
+        </td>
+
+        <td align = "center" style = "font-size: 12px;">
+
+          <div class="slider">
+
+            <input type = "range" id = "{{key}}" name = "{{key}}" value = "{{flowers[key][1]}}" step = "5" min = "0" max = "100" oninput = "document.getElementById('id{{key}}').innerHTML = this.value" />
+            
+            <br/>
+
+            <label id = "id{{key}}">{{flowers[key][1]}}</label>
+
+          </div>
+
+        </td>
+
+{% if loop.index % 4 == 0 %}
+
+      </tr>
+      
+      <tr>
+
+{% endif %}
+
+{% endfor %}
+
+      </tr>  
+
+    </table>
+
+  </div>
+
+  <br/>
+
+  <button type="submit" class="btn btn-primary mb-2">Generate flower</button>
+
+</form>
+
+<br />
+
+{% if isGraphCreated %}
+<div align = "center">
+  <img src="{{ url_for('static', filename='output.png') }}" alt="Generated Flower" id="my_image" width="1000"/>
+</div>
+{% endif %}
+
+<script>
+
+  function upload() {
+
+    const fileUploader = document.getElementById('file-uploader');
+
+    fileUploader.addEventListener('change', (event) => {
+      
+      console.log("Done")
+      
+      const files = event.target.files;
+      
+      console.log('files', files);
+      
+      console.log(files[0]);
+
+      refresh_image( );
+    
+    });
+
+  }
+  
+  function refresh_image( ) { 
+
+    var timestamp = new Date().getTime();     
+     
+    var imageElement = document.getElementById("my_image");     
+     
+    imageElement.src = "{{ url_for('static', filename='output.png') }}" + "?t=" + timestamp;
+
+  }
+  
+</script>
+
+{% endblock %}
