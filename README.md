@@ -1,4 +1,12 @@
-Objective: To generate flower image based on user's requests
+Team: Tensorflow Ninjas
+
+| Name | Student ID |
+|------|------------|
+| Sagnik Chowdhury | 015391064 |
+| Name 2 | Student ID 2 |
+| Name 3 | Stent ID 3 |
+
+Objective: Train a model to generate images of hybrid flower species based on user input.
 Dataset: https://www.kaggle.com/datasets/l3llff/flowers
 
 Steps:
