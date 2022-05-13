@@ -7,7 +7,7 @@
   
   <div class="sliders">
 
-    <table align="center">
+    <table align="center" border="0px">
 
       <tr>
 
@@ -47,7 +47,31 @@
 
 {% endfor %}
 
-      </tr>  
+      </tr>
+
+      <tr style = "height: 80px;">
+
+        <td colspan="4" >
+          
+          <label for="models">Choose a model:</label>
+
+          <select id="models" name="models">
+
+            <option value="1" {% if model == 1 %}selected="selected"{% endif %}>GAN Not trained</option>
+            <option value="2" {% if model == 2 %}selected="selected"{% endif %}>GAN</option>
+            <option value="3" {% if model == 3 %}selected="selected"{% endif %}>Cycle GAN</option>
+            <option value="4" {% if model == 4 %}selected="selected"{% endif %}>Cycle GAN v2</option>
+
+          </select>
+        
+        </td>
+        <td colspan="4" align="right">
+
+          <button type="submit" class="btn btn-primary mb-2">Generate flower</button>
+
+        </td>
+
+      </tr>
 
     </table>
 
@@ -55,7 +79,13 @@
 
   <br/>
 
-  <button type="submit" class="btn btn-primary mb-2">Generate flower</button>
+  <div>
+
+    
+
+  </div>
+
+  
 
 </form>
 
@@ -63,39 +93,19 @@
 
 {% if isGraphCreated %}
 <div align = "center">
-  <img src="{{ url_for('static', filename='output.png') }}" alt="Generated Flower" id="my_image" width="1000"/>
+  <img src="{{ url_for('static', filename='output.png') }}" alt="Generated Flower" id="my_image" width="600" onload="refresh_image()"/>
 </div>
 {% endif %}
 
 <script>
 
-  function upload() {
-
-    const fileUploader = document.getElementById('file-uploader');
-
-    fileUploader.addEventListener('change', (event) => {
-      
-      console.log("Done")
-      
-      const files = event.target.files;
-      
-      console.log('files', files);
-      
-      console.log(files[0]);
-
-      refresh_image( );
-    
-    });
-
-  }
-  
   function refresh_image( ) { 
 
-    var timestamp = new Date().getTime();     
+    //var timestamp = new Date().getTime();     
      
-    var imageElement = document.getElementById("my_image");     
+    //var imageElement = document.getElementById("my_image");     
      
-    imageElement.src = "{{ url_for('static', filename='output.png') }}" + "?t=" + timestamp;
+    //imageElement.src = "{{ url_for('static', filename='output.png') }}" + "?t=" + timestamp;
 
   }
   
